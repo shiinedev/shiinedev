@@ -3,7 +3,7 @@
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=shiinedev&label=Profile%20views&color=0e75b6&style=flat" alt="shiinedev" /> </p>
 
-- 🌱 I’m currently learning **full stack **
+- 🌱 I’m currently learning **full stack web and app **
 
 - 💬 Ask me about **html ,css**
 
