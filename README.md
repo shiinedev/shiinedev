@@ -1,7 +1,7 @@
 <h1 align="center">Hi 👋, I'm shiine_dev</h1>
 <h3 align="center">A passionate frontend developer</h3>
 
-<p align="left"> <img src="https://komarev.com/ghpvc/?username=shiinedev&label=Profile%20views&color=0e75b6&style=flat" alt="shiinedev" /> </p>
+
 
 - 🌱 I’m currently learning **full stack web development and app development **
 
