@@ -10,7 +10,7 @@ I'm a passionate developer focused on building impactful software and contributi
 
 
 ## 👯 Looking to Collaborate On
-- Open-source projects related to Web development .
+- Open-source projects related to Web development.
 - Innovative solutions for real-world problems.
 
 ## 💬 Ask Me About
