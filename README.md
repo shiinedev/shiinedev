@@ -30,6 +30,6 @@ I'm a passionate developer focused on building impactful software and contributi
 |:---:|:---:|
 
 
-Thank you for visiting my profile, and feel free to check out my repositories! 😊
+Thank you for visiting my profile, and feel free to check out my repositories!😊
 
 
