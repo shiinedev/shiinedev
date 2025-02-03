@@ -14,7 +14,7 @@ I'm a passionate developer focused on building impactful software and contributi
 - Innovative solutions for real-world problems.
 
 ## 💬 Ask Me About
-- Web development (HTML, CSS, JavaScript, React, etc.) .
+- Web development (HTML, CSS, JavaScript, React, etc.).
 
 ## 📫 How to Reach Me
 - Email: [shiinecadde17@gmail.com](mailto:shiinecadde17@gmail.com)
