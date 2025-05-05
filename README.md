@@ -5,7 +5,7 @@
 I'm a passionate developer focused on building impactful software and contributing to open-source projects. 
 
 ## 🔭 What I'm Currently Working On
-- 🌟 [vsCodeLanguageSupport](https://github.com/soplang/vsCodeLanguageSupport) - vsCode Language Support for Soplang.
+- 🌟 [vsCode Language Support](https://github.com/soplang/vsCodeLanguageSupport) - vsCode Language Support for Soplang.
 - 🚀 Improving my skills in Front-end development.
 
 
