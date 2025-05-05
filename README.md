@@ -5,7 +5,7 @@
 I'm a passionate developer focused on building impactful software and contributing to open-source projects. 
 
 ## 🔭 What I'm Currently Working On
-- 🌟 [dhaqsoPay](https://github.com/shiinedev/dhaqsoPay) - Test payments effortlessly, build confidently.
+- 🌟 [vsCodeLanguageSupport](https://github.com/soplang/vsCodeLanguageSupport) - vsCode Language Support for Soplang.
 - 🚀 Improving my skills in Front-end development.
 
 
@@ -14,7 +14,7 @@ I'm a passionate developer focused on building impactful software and contributi
 - Innovative solutions for real-world problems.
 
 ## 💬 Ask Me About
-- Web development (HTML, CSS, JavaScript, React, etc.) .
+- Front-end Web development.
 
 ## 📫 How to Reach Me
 - Email: [shiinecadde17@gmail.com](mailto:shiinecadde17@gmail.com)
