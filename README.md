@@ -16,7 +16,7 @@
 [![Email](https://img.shields.io/badge/-email-indigo?style=flat-square&logo=email)](mailto:shiinecadde17@gmail.com)
 
 ---
-### 🔥GitH ub Stats and Streak
+### 🔥GitHub Stats and Streak
 
 | ![Shiine's GitHub Stats](https://github-readme-stats.vercel.app/api?username=shiinedev&show_icons=true&theme=radical) | [![GitHub Streak](https://streak-stats.demolab.com/?user=shiinedev&theme=radical)](https://git.io/streak-stats) |
 |:---:|:---:|
