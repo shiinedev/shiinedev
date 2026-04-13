@@ -1,5 +1,11 @@
 import Link from "next/link"
 import { Badge } from "@/components/ui/badge"
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardDescription,
+} from "@/components/ui/card"
 import { SectionHeader } from "./section-header"
 
 const posts = [
@@ -31,41 +37,50 @@ const posts = [
 
 export function BlogPreview() {
   return (
-    <section id="blog" className="border-b px-7 py-10">
+    <section id="blog" className="border-b px-4 py-10 sm:px-7">
       <SectionHeader
         label="04 — Writing"
         title="Latest posts"
         link="All articles →"
         href="/blog"
       />
-      <ul className="mt-4 divide-y divide-border">
-        {posts.map((p) => (
-          <li key={p.num}>
-            <Link
-              href={p.href}
-              className="group -mx-2 flex items-start gap-4 rounded-lg px-2 py-4 transition-colors hover:bg-accent/50"
-            >
-              <span className="w-5 flex-shrink-0 pt-0.5 font-mono text-[11px] text-muted-foreground">
-                {p.num}
-              </span>
-              <div className="min-w-0 flex-1">
-                <div className="group-hover:text-brand text-[13px] leading-snug font-medium transition-colors">
-                  {p.title}
-                </div>
-                <div className="mt-1 text-[11px] text-muted-foreground">
-                  {p.date} · {p.readTime}
-                </div>
-              </div>
-              <Badge
-                variant="outline"
-                className="mt-0.5 flex-shrink-0 rounded-full text-[10px]"
-              >
-                {p.category}
-              </Badge>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <Card className="mt-5">
+        <CardHeader className="pb-2">
+          <CardDescription className="text-[10px] tracking-widest uppercase">
+            Recent writing
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="pt-0">
+          <ul className="divide-y divide-border">
+            {posts.map((p) => (
+              <li key={p.num}>
+                <Link
+                  href={p.href}
+                  className="group -mx-2 flex items-start gap-4 rounded-lg px-2 py-4 transition-colors first:pt-2 last:pb-2 hover:bg-accent/50"
+                >
+                  <span className="w-5 flex-shrink-0 pt-0.5 font-mono text-[11px] text-muted-foreground">
+                    {p.num}
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <p className="group-hover:text-brand text-[13px] leading-snug font-medium transition-colors">
+                      {p.title}
+                    </p>
+                    <p className="mt-1 text-[11px] text-muted-foreground">
+                      {p.date} · {p.readTime}
+                    </p>
+                  </div>
+                  <Badge
+                    variant="outline"
+                    className="mt-0.5 hidden flex-shrink-0 rounded-full text-[10px] sm:flex"
+                  >
+                    {p.category}
+                  </Badge>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </CardContent>
+      </Card>
     </section>
   )
 }

@@ -1,8 +1,6 @@
 "use client"
 
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
 
 const links = [
   { label: "Work", href: "#work" },
@@ -20,7 +18,7 @@ export function Nav() {
           className="flex items-center gap-2 text-[13px] font-medium"
         >
           <span className="bg-brand h-2 w-2 rounded-full" />
-          dev.portfolio
+          shiined.dev
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex">

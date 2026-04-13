@@ -1,4 +1,10 @@
 import { Badge } from "@/components/ui/badge"
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardDescription,
+} from "@/components/ui/card"
 import { SectionHeader } from "./section-header"
 
 const primary = ["Next.js", "TypeScript", "React", "Node.js"]
@@ -15,29 +21,34 @@ const secondary = [
 
 export function Skills() {
   return (
-    <section className="border-b px-7 py-10">
+    <section className="border-b px-4 py-10 sm:px-7">
       <SectionHeader label="03 — Skills" title="Stack" />
-      <div className="mt-5 flex flex-wrap gap-2">
-        {primary.map((s) => (
-          <Badge
-            key={s}
-            variant="secondary"
-            className="rounded-md px-3 py-1.5 text-[12px] font-medium"
-            // className="rounded-lg border border-neutral-300 bg-neutral-50 px-3 py-2.5 text-center text-[12px] font-medium dark:border-neutral-700 dark:bg-neutral-900"
-          >
-            {s}
-          </Badge>
-        ))}
-        {secondary.map((s) => (
-          <Badge
-            key={s}
-            variant="outline"
-            className="rounded-md px-3 py-1.5 text-[12px] text-muted-foreground"
-          >
-            {s}
-          </Badge>
-        ))}
-      </div>
+      <Card className="mt-5">
+        <CardHeader className="pb-2">
+          <CardDescription className="text-[11px]">Core stack</CardDescription>
+        </CardHeader>
+        <CardContent className="flex flex-wrap gap-2">
+          {primary.map((s) => (
+            <Badge
+              key={s}
+              variant="secondary"
+              className="rounded-md px-3 py-1 text-xs font-medium"
+            >
+              {s}
+            </Badge>
+          ))}
+          <div className="my-1 h-px w-full bg-border" />
+          {secondary.map((s) => (
+            <Badge
+              key={s}
+              variant="outline"
+              className="rounded-md px-3 py-1 text-xs text-muted-foreground"
+            >
+              {s}
+            </Badge>
+          ))}
+        </CardContent>
+      </Card>
     </section>
   )
 }

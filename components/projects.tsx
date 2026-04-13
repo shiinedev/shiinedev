@@ -1,5 +1,13 @@
 import Link from "next/link"
 import { Badge } from "@/components/ui/badge"
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardFooter,
+} from "@/components/ui/card"
 import { SectionHeader } from "./section-header"
 
 const projects = [
@@ -23,6 +31,7 @@ const projects = [
     tagline: "Task management for async teams",
     desc: "Built with Next.js App Router and real-time sync via Pusher.",
     stack: ["Next.js", "Prisma"],
+    featured: false,
     href: "#",
   },
   {
@@ -32,6 +41,7 @@ const projects = [
     tagline: "Auto-generated API docs",
     desc: "Beautiful docs from your OpenAPI spec, zero config.",
     stack: ["React", "Tailwind"],
+    featured: false,
     href: "#",
   },
   {
@@ -41,54 +51,58 @@ const projects = [
     tagline: "Edge logging dashboard",
     desc: "Minimal log viewer for Cloudflare Workers and serverless functions.",
     stack: ["Cloudflare", "Hono"],
+    featured: false,
     href: "#",
   },
 ]
 
 export function Projects() {
   return (
-    <section id="work" className="border-b px-7 py-10">
+    <section id="work" className="border-b px-4 py-10 sm:px-7">
       <SectionHeader
         label="02 — Selected work"
         title="Projects"
         link="See all →"
         href="#"
       />
-      <div className="mt-5 grid grid-cols-1 gap-2.5 md:grid-cols-3">
+
+      <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {projects.map((p, i) => (
           <Link
             key={p.name}
             href={p.href}
-            className={[
-              "group flex flex-col gap-3 rounded-lg border p-5 transition-colors",
-              "hover:border-border/80 hover:bg-accent/40",
-              i === 0 ? "bg-secondary md:col-span-2" : "bg-card",
-            ].join(" ")}
+            className={i === 0 ? "sm:col-span-2" : ""}
           >
-            <div
-              className={`flex h-8 w-8 items-center justify-center rounded-md text-[14px] ${p.iconClass}`}
-            >
-              {p.icon}
-            </div>
-            <div>
-              <div className="text-[13px] font-medium">{p.name}</div>
-              <div className="text-[11px] text-muted-foreground">
-                {p.tagline}
-              </div>
-            </div>
-            <p className="flex-1 text-[12px] leading-relaxed text-muted-foreground">
-              {p.desc}
-            </p>
-            <div className="flex items-center gap-2 pt-1">
-              <span className="font-mono text-[10px] text-muted-foreground">
-                {p.stack.join(" · ")}
-              </span>
-              {p.badge && (
-                <Badge className={`ml-auto text-[10px] ${p.badgeClass}`}>
-                  {p.badge}
-                </Badge>
-              )}
-            </div>
+            <Card className="group h-full cursor-pointer transition-colors hover:border-ring/40">
+              <CardHeader className="pb-2">
+                <div
+                  className={`mb-1 flex h-8 w-8 items-center justify-center rounded-md text-sm ${p.iconClass}`}
+                >
+                  {p.icon}
+                </div>
+                <CardTitle className="text-[13px]">{p.name}</CardTitle>
+                <CardDescription className="text-[11px]">
+                  {p.tagline}
+                </CardDescription>
+              </CardHeader>
+
+              <CardContent className="flex-1">
+                <p className="text-[12px] leading-relaxed text-muted-foreground">
+                  {p.desc}
+                </p>
+              </CardContent>
+
+              <CardFooter className="flex items-center gap-2 pt-2">
+                <span className="font-mono text-[10px] text-muted-foreground">
+                  {p.stack.join(" · ")}
+                </span>
+                {p.badge && (
+                  <Badge className={`ml-auto text-[10px] ${p.badgeClass}`}>
+                    {p.badge}
+                  </Badge>
+                )}
+              </CardFooter>
+            </Card>
           </Link>
         ))}
       </div>

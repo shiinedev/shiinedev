@@ -1,47 +1,55 @@
 import Link from "next/link"
-import { SectionHeader } from "../projects"
+import { Card, CardContent } from "@/components/ui/card"
+import { SectionHeader } from "../section-header"
 
 const socials = [
-  { label: "hello@alex.dev", href: "mailto:hello@alex.dev" },
-  { label: "GitHub", href: "https://github.com" },
-  { label: "Twitter / X", href: "https://twitter.com" },
-  { label: "LinkedIn", href: "https://linkedin.com" },
+  { label: "shiinedev96@gmail.com", href: "mailto:shiinedev96@gmail.com" },
+  { label: "GitHub", href: "https://github.com/shiinedev" },
+  { label: "Twitter / X", href: "https://twitter.com/shiinedev" },
+  { label: "LinkedIn", href: "https://linkedin.com/in/shiinedev" },
 ]
 
 export function FooterCta() {
   return (
-    <section className="border-b border-neutral-200 px-7 py-10 dark:border-neutral-800">
+    <section className="border-b px-4 py-10 sm:px-7">
       <SectionHeader label="06 — Contact" title="" />
-      <div className="mt-2 flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
-        <h2 className="max-w-xs text-[28px] leading-tight font-medium tracking-tight">
-          Got a project in mind?{" "}
-          <span className="text-[#7f77dd]">Let&apos;s build</span> something
-          great.
-        </h2>
-        <div className="flex flex-col items-start gap-2 md:items-end">
-          {socials.map((s) => (
-            <Link
-              key={s.label}
-              href={s.href}
-              className="flex items-center gap-1 text-[12px] text-neutral-500 transition-colors hover:text-neutral-900 dark:hover:text-neutral-100"
-            >
-              {s.label}
-              <span className="text-neutral-400">↗</span>
-            </Link>
-          ))}
-        </div>
-      </div>
+      <Card>
+        <CardContent className="pt-6">
+          <div className="flex flex-col items-start justify-between gap-8 sm:flex-row sm:items-center">
+            <h2 className="max-w-xs text-2xl leading-tight font-medium tracking-tight sm:text-[28px]">
+              Got a project in mind?{" "}
+              <span className="text-primary">Let&apos;s build</span> something
+              great.
+            </h2>
+            <div className="flex flex-col items-start gap-2.5 sm:items-end">
+              {socials.map((s) => (
+                <Link
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  className="flex items-center gap-1 text-[12px] text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  {s.label}
+                  <span className="opacity-50">↗</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </CardContent>
+      </Card>
     </section>
   )
 }
 
 export function Footer() {
   return (
-    <footer className="flex items-center justify-between px-7 py-5">
-      <span className="font-mono text-[11px] text-neutral-400">
+    <footer className="flex flex-col items-start justify-between gap-1 px-4 py-5 sm:flex-row sm:items-center sm:px-7">
+      <span className="font-mono text-[11px] text-muted-foreground">
         © 2026 shiinedev
       </span>
-      <span className="text-[11px] text-neutral-400">Made with intention.</span>
+      <span className="text-[11px] text-muted-foreground">
+        Made with intention.
+      </span>
     </footer>
   )
 }
