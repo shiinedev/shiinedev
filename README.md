@@ -1,13 +1,11 @@
-<h1 align="center">✨ Hey there, I'm shiine ✨</h1>
-<p align="center">MERN Stack Developer ⚛️ | Backend Explorer 🚀 | Open Source Lover 🌍</p>
+<h1 align="center">Hey there, I'm Andihakim </h1>
+<p align="center">Fullstack developer/ AI Engineer</p>
 
 ![Profile Views](https://komarev.com/ghpvc/?username=shiinedev&color=blue)
 
-### 🚀 About Me
+### About Me
 
-- 🧠 Learning and building full-stack projects using **React**, **Node.js**, **MongoDB**
-- 🤝 Actively contributing to **open source** communities
-- ⚡ I believe coding should be **fun**, **impactful**, and **collaborative**
+- Building AI-powered solutions for daily tasks 
 ---
 
 ### 📫 Let’s Connect!
