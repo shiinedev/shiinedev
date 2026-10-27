@@ -3,7 +3,7 @@ import { Geist, Geist_Mono, Lora } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
-import { Nav } from "@/components/layout/nav"
+import { SiteHeader } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
 
 const lora = Lora({ subsets: ["latin"], variable: "--font-serif" })
@@ -42,9 +42,15 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Nav />
+          <div className="min-h-screen bg-background px-3 py-3 sm:px-6 sm:py-6">
+          <div className="mx-auto flex max-w-4xl flex-col gap-4">
+          <SiteHeader />
           {children}
           <Footer />
+
+          </div>
+          </div>
+         
         </ThemeProvider>
       </body>
     </html>

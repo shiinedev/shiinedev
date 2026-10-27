@@ -1,20 +1,26 @@
-import { Nav } from "@/components/layout/nav"
-import { Hero } from "@/components/hero"
-import { Projects } from "@/components/projects"
-import { Skills } from "@/components/skills"
-import { BlogPreview } from "@/components/blog-preview"
-import { ResourcesPreview } from "@/components/resources-preview"
-import { FooterCta, Footer } from "@/components/layout/footer"
+"use client"
+import { ChevronDown } from "lucide-react";
+import { projects } from "@/lib/projects";
+import Link from "next/link";
+import { siteConfig } from "@/lib/site-config";
+import { Hero } from "@/components/hero";
+import { About } from "@/components/about";
+import { Projects } from "@/components/projects";
+import { Contact } from "@/components/contact";
+
 
 export default function Home() {
+
+  const {author} = siteConfig
   return (
-    <main className="mx-auto min-h-screen max-w-full border-x border-neutral-200 dark:border-neutral-800">
-      <Hero />
-      <Projects />
-      <Skills />
-      <BlogPreview />
-      <ResourcesPreview />
-      <FooterCta />
-    </main>
-  )
+    <>
+       <Hero/>
+
+        <About/>
+
+       <Projects />
+
+      <Contact />
+    </>
+  );
 }

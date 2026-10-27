@@ -1,134 +1,142 @@
-import { notFound } from "next/navigation"
-import Link from "next/link"
-import { ArrowLeft } from "lucide-react"
-import { Nav } from "@/components/nav"
-import { Footer } from "@/components/footer-cta"
-import { Badge } from "@/components/ui/badge"
-import { Card, CardContent } from "@/components/ui/card"
-import { PostBody } from "@/components/post-body"
-import { posts, type Category } from "@/lib/blog-data"
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
-const categoryColors: Record<Category, string> = {
-  TypeScript:
-    "bg-brand-subtle text-brand-subtle-foreground hover:bg-brand-subtle",
-  React:
-    "bg-success-subtle text-success-subtle-foreground hover:bg-success-subtle",
-  "AI Agents":
-    "bg-warning-subtle text-warning-subtle-foreground hover:bg-warning-subtle",
-}
+import { Markdown } from "@/components/layout/markdown";
+import { siteConfig } from "@/lib/site-config";
+import { getPost, getPosts } from "@/lib/blog-content";
 
-export async function generateStaticParams() {
-  return posts.map((p) => ({ slug: p.slug }))
-}
+
+type PageProps = {
+  params: Promise<{ slug: string }>;
+};
 
 export async function generateMetadata({
   params,
-}: {
-  params: Promise<{ slug: string }>
-}) {
-  const { slug } = await params
-  const post = posts.find((p) => p.slug === slug)
-  if (!post) return {}
-  return { title: `${post.title} — Alex`, description: post.excerpt }
+}: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await getPost(slug);
+
+  if (!post) {
+    return {
+      title: `Article not found — ${siteConfig.author.name}`,
+      robots: { index: false, follow: false },
+    };
+  }
+
+  const title = `${post.title} — ${siteConfig.author.name}`;
+  const url = `/blog/${post.slug}`;
+
+  return {
+    title,
+    description: post.excerpt,
+    authors: [{ name: siteConfig.author.name }],
+    alternates: { canonical: url },
+    openGraph: {
+      title,
+      description: post.excerpt,
+      type: "article",
+      url,
+      siteName: "${siteConfig.author.name}",
+      authors: [siteConfig.author.name],
+      publishedTime: post.isoDate,
+      section: post.category,
+    },
+    twitter: {
+      title,
+      description: post.excerpt,
+      card: "summary_large_image",
+    },
+    other: {
+      "article:author": siteConfig.author.name,
+      "article:published_time": post.isoDate,
+      "article:section": post.category,
+    },
+  };
 }
 
-export default async function BlogPostPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>
-}) {
-  const { slug } = await params
-  const post = posts.find((p) => p.slug === slug)
-  if (!post) notFound()
+export default async function BlogDetailPage({ params }: PageProps) {
+  const { slug } = await params;
+  const [post, posts] = await Promise.all([getPost(slug), getPosts()]);
 
-  const related = posts
-    .filter((p) => p.slug !== post.slug && p.category === post.category)
-    .slice(0, 3)
+  if (!post) notFound();
+
+  const others = posts.filter((item) => item.slug !== post.slug).slice(0, 3);
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.isoDate,
+    articleSection: post.category,
+    author: { "@type": "Person", name: siteConfig.author.name },
+    mainEntityOfPage: `/blog/${post.slug}`,
+  };
 
   return (
-    <div className="min-h-screen">
-      <div className="mx-auto max-w-[960px] border-x border-border">
-        <main>
-          {/* ── Header ── */}
-          <div className="border-b px-4 pt-8 pb-0 sm:px-7">
-            <Link
-              href="/blog"
-              className="mb-6 inline-flex items-center gap-1.5 text-[12px] text-muted-foreground transition-colors hover:text-foreground"
-            >
-              <ArrowLeft className="h-3.5 w-3.5" />
-              Back to blog
-            </Link>
+    
+      <>
+       
 
-            <div className="mb-4 flex flex-wrap items-center gap-2">
-              <Badge
-                className={`rounded-full text-[10px] ${categoryColors[post.category]}`}
-              >
-                {post.category}
-              </Badge>
-              {post.tags.map((tag) => (
-                <Badge
-                  key={tag}
-                  variant="outline"
-                  className="rounded-full font-mono text-[10px]"
+        <article className="surface-card px-6 py-10 sm:px-12 sm:py-14">
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+          />
+
+          <Link
+            href="/blog"
+            className="inline-flex items-center gap-2 text-xs text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" />
+            Back to blog
+          </Link>
+
+          <p className="mt-8 text-xs text-muted-foreground">
+            <span className="font-medium text-foreground">{siteConfig.author.name}</span> •{" "}
+            {post.date} • {post.readTime} • {post.category}
+          </p>
+          <h1 className="mt-2 max-w-2xl text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl">
+            {post.title}
+          </h1>
+          <p className="mt-4 max-w-xl border-b border-border pb-8 text-sm leading-relaxed text-muted-foreground">
+            {post.excerpt}
+          </p>
+
+          <div className="mt-4">
+            <Markdown>{post.content}</Markdown>
+          </div>
+        </article>
+
+        {others.length > 0 && (
+          <section className="px-2 py-6 sm:px-4">
+            <h2 className="text-lg font-semibold tracking-tight text-foreground">
+              More writing
+            </h2>
+            <div className="mt-4 divide-y divide-border">
+              {others.map((item) => (
+                <Link
+                  key={item.slug}
+                  href={`/blog/${item.slug}`}
+                  className="group flex flex-col gap-1 py-5"
                 >
-                  {tag}
-                </Badge>
+                  <p className="text-xs text-muted-foreground">
+                    {item.category} • {item.readTime}
+                  </p>
+                  <h3 className="flex items-center gap-1.5 text-sm font-semibold tracking-tight text-foreground">
+                    {item.title}
+                    <ArrowRight
+                      className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1"
+                      aria-hidden="true"
+                    />
+                  </h3>
+                </Link>
               ))}
             </div>
+          </section>
+        )}
 
-            <h1 className="mb-4 max-w-2xl text-2xl leading-tight font-medium tracking-tight sm:text-3xl">
-              {post.title}
-            </h1>
-
-            <p className="mb-6 max-w-xl text-sm leading-relaxed text-muted-foreground">
-              {post.excerpt}
-            </p>
-
-            <div className="flex items-center gap-3 pb-6 text-[12px] text-muted-foreground">
-              <div className="flex items-center gap-2">
-                <div className="bg-brand-subtle text-brand-subtle-foreground flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-medium">
-                  A
-                </div>
-                <span>Alex</span>
-              </div>
-              <span>·</span>
-              <span>{post.date}</span>
-              <span>·</span>
-              <span>{post.readTime} read</span>
-            </div>
-          </div>
-
-          {/* ── Body ── */}
-          <div className="px-4 py-10 sm:px-7">
-            <PostBody content={post.content} />
-          </div>
-
-          {/* ── Related posts ── */}
-          {related.length > 0 && (
-            <div className="border-t px-4 pt-8 pb-10 sm:px-7">
-              <p className="mb-4 text-[10px] tracking-widest text-muted-foreground uppercase">
-                More in {post.category}
-              </p>
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-                {related.map((r) => (
-                  <Link key={r.slug} href={`/blog/${r.slug}`} className="group">
-                    <Card className="h-full cursor-pointer transition-colors hover:border-ring/40">
-                      <CardContent className="pt-5 pb-4">
-                        <p className="group-hover:text-brand mb-2 text-[12px] leading-snug font-medium transition-colors">
-                          {r.title}
-                        </p>
-                        <p className="text-[11px] text-muted-foreground">
-                          {r.date} · {r.readTime} read
-                        </p>
-                      </CardContent>
-                    </Card>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          )}
-        </main>
-      </div>
-    </div>
-  )
+    </>
+  );
 }
