@@ -1,111 +1,52 @@
+import { projects } from "@/lib/projects"
 import Link from "next/link"
-import { Badge } from "@/components/ui/badge"
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardFooter,
-} from "@/components/ui/card"
-import { SectionHeader } from "./section-header"
 
-const projects = [
-  {
-    icon: "⬡",
-    iconClass: "bg-brand-subtle text-brand-subtle-foreground",
-    name: "DevForge",
-    tagline: "CLI scaffolding toolkit",
-    desc: "Command-line toolkit for scaffolding full-stack projects in seconds. Used by 2k+ developers across 40 countries.",
-    stack: ["TypeScript", "Node.js", "Bash"],
-    badge: "Open source",
-    badgeClass:
-      "bg-success-subtle text-success-subtle-foreground hover:bg-success-subtle",
-    featured: true,
-    href: "#",
-  },
-  {
-    icon: "◈",
-    iconClass: "bg-success-subtle text-success-subtle-foreground",
-    name: "Flowdesk",
-    tagline: "Task management for async teams",
-    desc: "Built with Next.js App Router and real-time sync via Pusher.",
-    stack: ["Next.js", "Prisma"],
-    featured: false,
-    href: "#",
-  },
-  {
-    icon: "◎",
-    iconClass: "bg-warning-subtle text-warning-subtle-foreground",
-    name: "ReadAPI",
-    tagline: "Auto-generated API docs",
-    desc: "Beautiful docs from your OpenAPI spec, zero config.",
-    stack: ["React", "Tailwind"],
-    featured: false,
-    href: "#",
-  },
-  {
-    icon: "◇",
-    iconClass: "bg-brand-subtle text-brand-subtle-foreground",
-    name: "LogSnap",
-    tagline: "Edge logging dashboard",
-    desc: "Minimal log viewer for Cloudflare Workers and serverless functions.",
-    stack: ["Cloudflare", "Hono"],
-    featured: false,
-    href: "#",
-  },
-]
 
-export function Projects() {
-  return (
-    <section id="work" className="border-b px-4 py-10 sm:px-7">
-      <SectionHeader
-        label="02 — Selected work"
-        title="Projects"
-        link="See all →"
-        href="#"
-      />
+export const Projects = () =>{
+    return(
+        <section id="projects" className="px-2 py-8 sm:px-4">
+        <h2 className="text-lg font-semibold tracking-tight text-foreground">
+          Case Studies &amp; Projects
+        </h2>
+        <p className="mt-1 text-xs text-muted-foreground">
+          A selection of projects showcasing strategy, design thinking, and measurable impact.
+        </p>
 
-      <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {projects.map((p, i) => (
+        <div className="mt-8 grid gap-x-6 gap-y-8 sm:grid-cols-2">
+          {projects.map((p) => (
+            <Link
+              key={p.slug}
+              href={`/rpojects/${p.slug}`}
+             
+              className="group"
+            >
+              <div className="overflow-hidden rounded-2xl bg-muted">
+                <video
+                  src={p.video}
+                  poster={p.img}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  aria-label={p.title}
+                  className="h-56 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
+              <p className="mt-4 text-xs text-muted-foreground">{p.tag}</p>
+              <h3 className="mt-1 text-sm font-semibold text-foreground">{p.title}</h3>
+            </Link>
+          ))}
+        </div>
+
+        <div className="mt-10 flex justify-center">
           <Link
-            key={p.name}
-            href={p.href}
-            className={i === 0 ? "sm:col-span-2" : ""}
+            href="/blog"
+            className="rounded-full border border-border bg-card px-6 py-3 text-sm font-medium text-foreground transition-colors hover:bg-muted"
           >
-            <Card className="group h-full cursor-pointer transition-colors hover:border-ring/40">
-              <CardHeader className="pb-2">
-                <div
-                  className={`mb-1 flex h-8 w-8 items-center justify-center rounded-md text-sm ${p.iconClass}`}
-                >
-                  {p.icon}
-                </div>
-                <CardTitle className="text-[13px]">{p.name}</CardTitle>
-                <CardDescription className="text-[11px]">
-                  {p.tagline}
-                </CardDescription>
-              </CardHeader>
-
-              <CardContent className="flex-1">
-                <p className="text-[12px] leading-relaxed text-muted-foreground">
-                  {p.desc}
-                </p>
-              </CardContent>
-
-              <CardFooter className="flex items-center gap-2 pt-2">
-                <span className="font-mono text-[10px] text-muted-foreground">
-                  {p.stack.join(" · ")}
-                </span>
-                {p.badge && (
-                  <Badge className={`ml-auto text-[10px] ${p.badgeClass}`}>
-                    {p.badge}
-                  </Badge>
-                )}
-              </CardFooter>
-            </Card>
+            Read the Blog
           </Link>
-        ))}
-      </div>
-    </section>
-  )
+        </div>
+      </section>
+    )
 }
